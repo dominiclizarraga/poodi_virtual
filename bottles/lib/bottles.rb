@@ -4,13 +4,29 @@ class Bottles
   end
 
   def song(number_of_bottles)
-    "#{number_of_bottles} bottles of beer on the wall, " +
-    "#{number_of_bottles} bottles of beer.\n" +
-    "Take one down and pass it around, " +
-    "#{number_of_bottles -= 1} #{singular_or_plural(number_of_bottles)} of beer on the wall.\n"
+    "#{singular_or_plural(number_of_bottles)} of beer on the wall, " +
+    "#{singular_or_plural(number_of_bottles)} of beer.\n" +
+    "Take #{it_or_one(number_of_bottles -= 1)} down and pass it around, " +
+    "#{singular_or_plural(number_of_bottles)} of beer on the wall.\n"
   end
 
   def singular_or_plural(number_of_bottles_remaining)
-    number_of_bottles_remaining == 1 ? "bottle" : "bottles"
+    if number_of_bottles_remaining == 0
+      "no more bottles"
+    elsif number_of_bottles_remaining == 1
+      "#{number_of_bottles_remaining} bottle"
+    else
+      "#{number_of_bottles_remaining} bottles"
+    end
+  end
+
+  def it_or_one(number_of_bottles)
+    if number_of_bottles > 1
+      "one"
+    elsif number_of_bottles == 1
+      "one"
+    else
+      "it"
+    end
   end
 end
