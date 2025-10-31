@@ -1,6 +1,35 @@
 require_relative '../../test_helper'
 require_relative '../lib/house'
 
+
+class OriginalOrdererTest < Minitest::Test
+  def test_order
+    input = %w(a b c d e)
+    expected = input
+    assert_equal expected, OriginalOrderer.new.order(input)
+  end
+end
+
+class RandomOrdererTest < Minitest::Test
+  def test_order
+    Random.srand(1)
+    input = %w(a b c d e)
+    expected = %w(b a e c d)
+    assert_equal expected, RandomOrderer.new.order(input)
+    Random.srand
+  end
+end
+
+class RandomLastOrdererTest < Minitest::Test
+  def test_order
+    Random.srand(1)
+    input = %w(a b c d e)
+    expected = %w(a b c d e always_last_item)
+    assert_equal expected, RandomLastOrderer.new.order(input)
+    Random.srand
+  end
+end
+
 class HouseTest < Minitest::Test
   attr_reader :tale
   def setup

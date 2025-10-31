@@ -1,5 +1,5 @@
-class House
-  DATA =
+class Phrases
+    DATA =
     [ "the horse and the hound and the horn that belonged to",
       "the farmer sowing his corn that kept",
       "the rooster that crowed in the morn that woke",
@@ -12,19 +12,35 @@ class House
       "the rat that ate",
       "the malt that lay in",
       "the house that Jack built"]
-  attr_reader :data, :prefix
+  attr_reader :data
 
-  def initialize(orderer: OriginalOrderer.new, prefixer: MundanePrefixer.new)
+  def initialize(orderer: OriginalOrderer.new)
     @data = orderer.order(DATA)
+  end
+
+  def phrase(num)
+    data.last(num).join(" ")
+  end
+
+  def size
+    data.size
+  end
+end
+
+class House
+  attr_reader :phrases, :prefix
+
+  def initialize(phrases: Phrases.new, prefixer: MundanePrefixer.new)
+    @phrases = phrases
     @prefix = prefixer.prefix
   end
 
   def recite
-    1.upto(12).collect {|i| line(i)}.join("\n")
+    1.upto(phrases.size).collect {|i| line(i)}.join("\n")
   end
 
-  def phrase(num=1)
-    data.last(num).join(" ")
+  def phrase(num)
+    phrases.phrase
   end
 
   def line(num)
@@ -57,10 +73,3 @@ class MundanePrefixer
     "This is"
   end
 end
-
-
-puts House.new(orderer: RandomOrderer.new).line(12)
-puts
-puts House.new(prefixer: PiratePrefixer.new).line(12)
-puts
-puts House.new(orderer: RandomOrderer.new, prefixer: PiratePrefixer.new).line(12)
