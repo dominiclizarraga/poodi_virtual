@@ -1,17 +1,18 @@
 class Phrases
     DATA =
-    [ "the horse and the hound and the horn that belonged to",
-      "the farmer sowing his corn that kept",
-      "the rooster that crowed in the morn that woke",
-      "the priest all shaven and shorn that married",
-      "the man all tattered and torn that kissed",
-      "the maiden all forlorn that milked",
-      "the cow with the crumpled horn that tossed",
-      "the dog that worried",
-      "the cat that killed",
-      "the rat that ate",
-      "the malt that lay in",
-      "the house that Jack built"]
+    [ ["the horse and the hound and the horn", "that belonged to"],
+      ["the farmer sowing his corn", "that kept"],
+      ["the rooster that crowed in the morn", "that woke"],
+      ["the priest all shaven and shorn", "that married"],
+      ["the man all tattered and torn", "that kissed"],
+      ["the maiden all forlorn", "that milked"],
+      ["the cow with the crumpled horn", "that tossed"],
+      ["the dog", "that worried"],
+      ["the cat", "that killed"],
+      ["the rat", "that ate"],
+      ["the malt", "that lay in"],
+      ["the house", "that Jack built"]]
+
   attr_reader :data
 
   def initialize(orderer: OriginalOrderer.new)
@@ -32,14 +33,14 @@ class House
 
   def initialize(phrases: Phrases.new, prefixer: MundanePrefixer.new)
     @phrases = phrases
-    @prefix = prefixer.prefix
+    @prefixer = prefixer.prefix
   end
 
   def recite
     1.upto(phrases.size).collect {|i| line(i)}.join("\n")
   end
 
-  def phrase(num)
+  def phrase
     phrases.phrase
   end
 
@@ -73,3 +74,7 @@ class MundanePrefixer
     "This is"
   end
 end
+
+puts
+phrases = Phrases.new(orderer: OriginalOrderer.new)
+puts House.new(phrases: phrases).line(12)
