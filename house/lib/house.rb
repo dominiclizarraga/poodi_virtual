@@ -40,7 +40,7 @@ class House
     1.upto(phrases.size).collect {|i| line(i)}.join("\n")
   end
 
-  def phrase
+  def phrase(num)
     phrases.phrase
   end
 
