@@ -50,6 +50,11 @@ class House
   end
 end
 
+class MixedColumnOrderer
+  def order(data)
+    data.transpose.map { |column| column.shuffle }.transpose
+  end
+end
 
 class RandomOrderer
   def order(data)
@@ -82,5 +87,5 @@ class MundanePrefixer
 end
 
 puts
-phrases = Phrases.new(orderer: OriginalOrderer.new)
+phrases = Phrases.new(orderer: MixedColumnOrderer.new)
 puts House.new(phrases: phrases).line(12)

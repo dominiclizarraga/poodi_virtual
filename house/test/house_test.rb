@@ -2,6 +2,16 @@ require_relative '../../test_helper'
 require_relative '../lib/house'
 
 
+class MixedColumnOrdererTest < Minitest::Test
+  def test_order
+    Random.srand(1)
+    input = [["a1", "a2"], ["b1", "b2"], ["c1", "c2"], ["d1", "d2"], ["e1", "e2"]]
+    expected = [["c1", "a2"], ["b1", "c2"], ["e1", "e2"], ["a1", "d2"], ["d1", "b2"]]
+    assert_equal expected, MixedColumnOrderer.new.order(input)
+    Random.srand
+  end
+end
+
 class OriginalOrdererTest < Minitest::Test
   def test_order
     input = %w(a b c d e)
