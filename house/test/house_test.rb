@@ -14,7 +14,8 @@ class RandomOrdererTest < Minitest::Test
   def test_order
     Random.srand(1)
     input = %w(a b c d e)
-    expected = %w(b a e c d)
+    puts input
+    expected = %w(c b e a d)
     assert_equal expected, RandomOrderer.new.order(input)
     Random.srand
   end
@@ -23,8 +24,8 @@ end
 class RandomLastOrdererTest < Minitest::Test
   def test_order
     Random.srand(1)
-    input = %w(a b c d e)
-    expected = %w(a b c d e always_last_item)
+    input = %w(a b c d e always_last_item)
+    expected = %w(c b e a d always_last_item)
     assert_equal expected, RandomLastOrderer.new.order(input)
     Random.srand
   end

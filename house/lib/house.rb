@@ -41,7 +41,7 @@ class House
   end
 
   def phrase(num)
-    phrases.phrase
+    phrases.phrase(num)
   end
 
   def line(num)
@@ -62,6 +62,11 @@ class OriginalOrderer
   end
 end
 
+class RandomLastOrderer
+  def order(data)
+    data[0..-2].shuffle << data.last
+  end
+end
 
 class PiratePrefixer
   def prefix
