@@ -11,7 +11,8 @@ class Phrases
       ["the cat", "that killed"],
       ["the rat", "that ate"],
       ["the malt", "that lay in"],
-      ["the house", "that Jack built"]]
+      ["the house", "that Jack built"]
+    ]
 
   attr_reader :data
 
@@ -33,7 +34,7 @@ class House
 
   def initialize(phrases: Phrases.new, prefixer: MundanePrefixer.new)
     @phrases = phrases
-    @prefixer = prefixer.prefix
+    @prefix = prefixer.prefix
   end
 
   def recite

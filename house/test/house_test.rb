@@ -14,7 +14,6 @@ class RandomOrdererTest < Minitest::Test
   def test_order
     Random.srand(1)
     input = %w(a b c d e)
-    puts input
     expected = %w(c b e a d)
     assert_equal expected, RandomOrderer.new.order(input)
     Random.srand
